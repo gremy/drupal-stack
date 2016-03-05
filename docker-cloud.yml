@@ -1,8 +1,8 @@
 mysql:
   image: mysql:5.5
   environment:
-    MYSQL_ROOT_PASSWORD: rootpasswd
-    MYSQL_DATABASE: drupal
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_DATABASE
   volumes:
     -  ./conf/mysql/conf.d:/etc/mysql/conf.d
   ports:
