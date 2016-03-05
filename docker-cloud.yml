@@ -1,0 +1,34 @@
+mysql:
+  image: mysql:5.5
+  environment:
+    MYSQL_ROOT_PASSWORD: rootpasswd
+    MYSQL_DATABASE: drupal
+  volumes:
+    -  ./conf/mysql/conf.d:/etc/mysql/conf.d
+  ports:
+    - "3306"
+
+redis:
+  image: redis:2.8
+  ports:
+    - "6379"
+
+solr:
+  image: solr:5.5
+
+app:
+  image: drupal:8.1-fpm
+
+nginx:
+  image: nginx:1.9
+  volumes:
+    - /opt/code/example/drupal:/var/www
+  ports:
+    - "80"
+    - "443"
+    - "22"
+  links:
+    - nginx
+    - mysql
+    - redis
+    - solr
