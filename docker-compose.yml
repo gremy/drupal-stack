@@ -1,12 +1,22 @@
-mysql:
-  image: mysql:5.5
+data:
+  image: busybox
+  volumes:
+    - /var/lib/mysql
+    - /var/www/html
+    - /var/www/html/sites/default/files:/media
+
+db:
+  image: mariadb:10.1
   environment:
     - MYSQL_ROOT_PASSWORD
+    - MYSQL_USER
+    - MYSQL_PASSWORD
     - MYSQL_DATABASE
+    - MYSQL_HOME
   volumes:
     -  ./conf/mysql/conf.d:/etc/mysql/conf.d
   ports:
-    - "3306"
+    - 3306:3306
 
 redis:
   image: redis:2.8
@@ -16,13 +26,13 @@ redis:
 solr:
   image: solr:5.5
 
-app:
+compute:
   image: drupal:8.1-fpm
 
-nginx:
+web:
   image: nginx:1.9
-  volumes:
-    - /opt/code/example/drupal:/var/www
+  volumes_from:
+    - data
   ports:
     - "80"
     - "443"
@@ -30,5 +40,5 @@ nginx:
   links:
     - nginx
     - mysql
-    - redis
+    - redis:cache
     - solr

@@ -1,0 +1,8 @@
+
+.catalog:
+  name: "Drupal"
+  version: "v0.1"
+  description: "Drupal 8 stack"
+  uuid: Drupal-0
+  minimum_rancher_version: v0.51.0
+  questions:

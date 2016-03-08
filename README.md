@@ -1,5 +1,6 @@
 # drupal-stack
 
-Docker Cloud stack for Drupal
+## Docker stack for Drupal
 
-Using this stack you can easily get a Drupal environment deployed on Docker Cloud
+This project aims to provide an easily deployable Drupal 8 docker stack that
+is compatible with Docker Compose, Docker Cloud and Rancher.
